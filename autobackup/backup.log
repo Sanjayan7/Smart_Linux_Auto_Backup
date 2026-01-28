@@ -1,0 +1,298 @@
+2026-01-27 21:36:18,641 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 21:56:51,512 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 22:07:55,036 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 22:07:59,459 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 22:21:28,473 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 22:27:34,864 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 22:27:34,918 - autobackup.utils.logger - ERROR - Failed to remove crontab entry: Crontab command not found. Please ensure cron is installed and in your PATH.
+2026-01-27 22:29:56,350 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 22:29:59,588 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 22:29:59,642 - autobackup.utils.logger - ERROR - Failed to remove crontab entry: Crontab command not found. Please ensure cron is installed and in your PATH.
+2026-01-27 22:31:40,004 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 22:33:48,558 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 22:33:48,675 - autobackup.utils.logger - INFO - Crontab updated successfully.
+2026-01-27 22:33:48,675 - autobackup.utils.logger - INFO - Removed existing cron job as no daily backup interval is set.
+2026-01-27 22:49:08,708 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 22:49:12,102 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 22:49:12,188 - autobackup.utils.logger - INFO - Crontab updated successfully
+2026-01-27 22:49:18,607 - autobackup.utils.logger - INFO - Starting backup job backup_20260127224918
+2026-01-27 22:49:18,608 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 22:49:18,609 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 22:49:18,609 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_22-49-18
+2026-01-27 22:49:18,610 - autobackup.utils.logger - ERROR - Rsync command not found. Please ensure rsync is installed and in your PATH.
+2026-01-27 22:49:18,610 - autobackup.utils.logger - ERROR - Rsync command not found. Please ensure rsync is installed and in your PATH.
+Traceback (most recent call last):
+  File "/home/sanjayan/Arch_Proj/autobackup/core/rsync_engine.py", line 66, in run_rsync
+    self._process = subprocess.Popen(
+                    ~~~~~~~~~~~~~~~~^
+        rsync_cmd,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        universal_newlines=True
+        ^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/lib/python3.14/subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1989, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'rsync'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sanjayan/Arch_Proj/autobackup/core/backup_manager.py", line 90, in _run_backup_thread
+    summary = self._rsync_engine.run_rsync(
+        source=job.config.source,
+    ...<5 lines>...
+        compress=job.config.compression,
+    )
+  File "/home/sanjayan/Arch_Proj/autobackup/core/rsync_engine.py", line 107, in run_rsync
+    raise RuntimeError(error_message)
+RuntimeError: Rsync command not found. Please ensure rsync is installed and in your PATH.
+2026-01-27 22:49:18,613 - autobackup.utils.logger - ERROR - Rsync command not found. Please ensure rsync is installed and in your PATH.
+2026-01-27 22:50:38,090 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 22:51:12,210 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 22:51:12,295 - autobackup.utils.logger - INFO - Crontab updated successfully
+2026-01-27 22:51:17,850 - autobackup.utils.logger - INFO - Starting backup job backup_20260127225117
+2026-01-27 22:51:17,851 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 22:51:17,852 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 22:51:17,852 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_22-51-17
+2026-01-27 22:51:17,905 - autobackup.utils.logger - INFO - Backup backup_20260127225117 completed
+2026-01-27 22:52:34,271 - autobackup.utils.logger - INFO - Starting backup job backup_20260127225234
+2026-01-27 22:52:34,305 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 22:52:34,305 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 22:52:34,305 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_22-52-34
+2026-01-27 22:52:34,358 - autobackup.utils.logger - INFO - Backup backup_20260127225234 completed
+2026-01-27 22:52:40,247 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 22:52:43,473 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 22:52:43,559 - autobackup.utils.logger - INFO - Crontab updated successfully
+2026-01-27 22:52:50,114 - autobackup.utils.logger - INFO - Starting backup job backup_20260127225250
+2026-01-27 22:52:50,115 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 22:52:50,116 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 22:52:50,116 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_22-52-50
+2026-01-27 22:52:50,170 - autobackup.utils.logger - INFO - Backup backup_20260127225250 completed
+2026-01-27 22:53:43,675 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 22:53:48,546 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 22:53:48,632 - autobackup.utils.logger - INFO - Crontab updated successfully
+2026-01-27 22:53:59,814 - autobackup.utils.logger - INFO - Starting backup job backup_20260127225359
+2026-01-27 22:53:59,815 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 22:53:59,815 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 22:53:59,815 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_22-53-59
+2026-01-27 22:53:59,869 - autobackup.utils.logger - INFO - Backup backup_20260127225359 completed
+2026-01-27 22:54:25,028 - autobackup.utils.logger - INFO - Starting backup job backup_20260127225425
+2026-01-27 22:54:25,029 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 22:54:25,029 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_22-54-25
+2026-01-27 22:54:29,333 - autobackup.utils.logger - INFO - Backup backup_20260127225425 completed
+2026-01-27 22:55:06,513 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 22:55:09,196 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 22:55:09,282 - autobackup.utils.logger - INFO - Crontab updated successfully
+2026-01-27 22:55:19,883 - autobackup.utils.logger - INFO - Starting backup job backup_20260127225519
+2026-01-27 22:55:19,885 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 22:55:19,885 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 22:55:19,885 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_22-55-19
+2026-01-27 22:55:19,940 - autobackup.utils.logger - INFO - Backup backup_20260127225519 completed
+2026-01-27 22:57:52,784 - autobackup.utils.logger - INFO - Starting backup job backup_20260127225752
+2026-01-27 22:57:52,785 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 22:57:52,785 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_22-57-52
+2026-01-27 22:57:57,163 - autobackup.utils.logger - INFO - Backup backup_20260127225752 completed
+2026-01-27 23:07:32,618 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 23:10:25,649 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 23:10:33,589 - autobackup.utils.logger - INFO - Starting backup job backup_20260127231033
+2026-01-27 23:10:33,590 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 23:10:33,590 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 23:10:33,590 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_23-10-33
+2026-01-27 23:10:54,736 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 23:10:57,222 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 23:11:11,540 - autobackup.utils.logger - INFO - Starting backup job backup_20260127231111
+2026-01-27 23:11:11,541 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 23:11:11,575 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 23:11:11,575 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_23-11-11
+2026-01-27 23:17:29,500 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 23:19:02,520 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 23:19:09,019 - autobackup.utils.logger - INFO - Starting backup job backup_20260127231909
+2026-01-27 23:19:09,020 - autobackup.utils.logger - ERROR - 'BackupManager' object has no attribute '_create_backup_dir'
+Traceback (most recent call last):
+  File "/home/sanjayan/Arch_Proj/autobackup/core/backup_manager.py", line 75, in _run_backup_thread
+    backup_dir = self._create_backup_dir(job)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BackupManager' object has no attribute '_create_backup_dir'
+2026-01-27 23:19:09,021 - autobackup.utils.logger - ERROR - 'BackupManager' object has no attribute '_create_backup_dir'
+2026-01-27 23:19:36,295 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 23:23:20,079 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 23:23:26,504 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 23:23:26,504 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 23:23:26,504 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_23-23-26
+2026-01-27 23:23:44,091 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 23:28:31,000 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 23:28:36,940 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 23:28:36,940 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 23:28:36,940 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_23-28-36
+2026-01-27 23:28:36,996 - autobackup.utils.logger - ERROR - DEBUG backup_dir = /home/sanjayan/Backup/2026-01-27_23-28-36
+2026-01-27 23:28:36,996 - autobackup.utils.logger - ERROR - DEBUG backup_dir exists = True
+2026-01-27 23:28:36,997 - autobackup.utils.logger - ERROR - DEBUG backup_dir contents = []
+2026-01-27 23:28:47,467 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 23:35:15,095 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 23:35:21,481 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 23:35:21,482 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 23:35:21,482 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_23-35-21
+2026-01-27 23:35:21,538 - autobackup.utils.logger - ERROR - DEBUG backup_dir = /home/sanjayan/Backup/2026-01-27_23-35-21
+2026-01-27 23:35:21,538 - autobackup.utils.logger - ERROR - DEBUG backup_dir exists = True
+2026-01-27 23:35:21,538 - autobackup.utils.logger - ERROR - DEBUG backup_dir contents = []
+2026-01-27 23:36:30,356 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 23:36:30,356 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 23:36:30,357 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_23-36-30
+2026-01-27 23:36:30,411 - autobackup.utils.logger - ERROR - DEBUG backup_dir = /home/sanjayan/Backup/2026-01-27_23-36-30
+2026-01-27 23:36:30,411 - autobackup.utils.logger - ERROR - DEBUG backup_dir exists = True
+2026-01-27 23:36:30,411 - autobackup.utils.logger - ERROR - DEBUG backup_dir contents = []
+2026-01-27 23:38:16,109 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 23:38:18,747 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 23:39:04,441 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 23:39:04,441 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 23:39:04,441 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_23-39-04
+2026-01-27 23:39:04,496 - autobackup.utils.logger - ERROR - DEBUG backup_dir = /home/sanjayan/Backup/2026-01-27_23-39-04
+2026-01-27 23:39:04,496 - autobackup.utils.logger - ERROR - DEBUG backup_dir exists = True
+2026-01-27 23:39:04,496 - autobackup.utils.logger - ERROR - DEBUG backup_dir contents = []
+2026-01-27 23:39:16,951 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 23:39:16,951 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_23-39-16
+2026-01-27 23:39:21,574 - autobackup.utils.logger - ERROR - DEBUG backup_dir = /home/sanjayan/Backup/2026-01-27_23-39-16
+2026-01-27 23:39:21,574 - autobackup.utils.logger - ERROR - DEBUG backup_dir exists = True
+2026-01-27 23:39:21,574 - autobackup.utils.logger - ERROR - DEBUG backup_dir contents = ['Anime']
+2026-01-27 23:42:08,762 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-27 23:42:11,549 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-27 23:42:13,914 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 23:42:13,914 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_23-42-13
+2026-01-27 23:42:25,851 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-27 23:42:25,885 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-27 23:42:25,885 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-27_23-42-25
+2026-01-27 23:43:52,909 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-28 09:24:35,233 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-28 09:26:31,454 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 09:26:31,454 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_09-26-31
+2026-01-28 09:27:09,540 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-28 09:27:09,540 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_09-27-09
+2026-01-28 09:52:23,308 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-28 10:00:15,773 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-28 10:00:27,082 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-28 10:00:27,083 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 10:00:27,083 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_10-00-27
+2026-01-28 10:09:01,161 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-28 10:09:01,161 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 10:09:01,161 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_10-09-01
+2026-01-28 10:11:15,280 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-28 10:11:15,280 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 10:11:15,280 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_10-11-15
+2026-01-28 10:11:26,714 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 10:11:26,714 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_10-11-26
+2026-01-28 10:15:37,676 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 10:15:37,677 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_10-15-37
+2026-01-28 10:23:56,227 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-28 10:27:06,454 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 10:27:06,455 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_10-27-06
+2026-01-28 10:28:10,290 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 10:28:10,291 - autobackup.utils.logger - ERROR - Error loading backup versions: 'BackupManager' object has no attribute 'list_backup_versions'
+2026-01-28 10:29:47,687 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 10:29:47,722 - autobackup.utils.logger - ERROR - Error loading backup versions: 'BackupManager' object has no attribute 'list_backup_versions'
+2026-01-28 10:31:41,284 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 10:31:41,285 - autobackup.utils.logger - ERROR - Error loading backup versions: 'BackupManager' object has no attribute 'list_backup_versions'
+2026-01-28 10:39:35,613 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 10:39:35,613 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_10-39-35
+2026-01-28 10:40:45,490 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 10:40:45,490 - autobackup.utils.logger - ERROR - Error loading backup versions: 'BackupManager' object has no attribute 'list_backup_versions'
+2026-01-28 10:41:07,852 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 10:41:07,853 - autobackup.utils.logger - ERROR - Error loading backup versions: 'BackupManager' object has no attribute 'list_backup_versions'
+2026-01-28 10:41:20,707 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-28 10:46:12,818 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-28 10:46:18,740 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 10:46:18,740 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_10-46-18
+2026-01-28 10:46:29,275 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 10:46:29,277 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_10-46-18
+2026-01-28 10:46:34,329 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 10:46:34,331 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_10-46-18
+2026-01-28 10:50:40,163 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 10:50:40,163 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_10-50-40
+2026-01-28 10:51:58,425 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 10:51:58,426 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_10-50-40
+2026-01-28 10:52:16,673 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 10:52:16,676 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_10-50-40
+2026-01-28 10:53:59,102 - autobackup.utils.logger - INFO - Restoring 1 items from 2026-01-28_10-50-40 to /home/sanjayan/Restore
+2026-01-28 10:53:59,103 - autobackup.utils.logger - WARNING - Source path does not exist: /home/sanjayan/Backup/2026-01-28_10-50-40/loading...
+2026-01-28 10:53:59,103 - autobackup.utils.logger - INFO - Restore completed: 1 items to /home/sanjayan/Restore
+2026-01-28 10:53:59,104 - autobackup.utils.logger - INFO - Restore completed successfully.
+2026-01-28 10:54:53,649 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-28 11:01:18,308 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-28 11:01:40,832 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 11:01:40,833 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_11-01-40
+2026-01-28 11:02:29,841 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 11:02:29,843 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_11-01-40
+2026-01-28 11:02:59,884 - autobackup.utils.logger - INFO - Restoring 1 items from 2026-01-28_11-01-40 to /home/sanjayan/Restore
+2026-01-28 11:03:01,167 - autobackup.utils.logger - INFO - Decrypted: /home/sanjayan/Restore/Anime/18. The Seven Deadly Sins S2 [720p] [Dual].mkv.gpg
+2026-01-28 11:03:01,167 - autobackup.utils.logger - INFO - Restore completed: 1 items to /home/sanjayan/Restore
+2026-01-28 11:03:01,167 - autobackup.utils.logger - INFO - Restore completed successfully.
+2026-01-28 11:03:22,074 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 11:03:22,081 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_11-01-40
+2026-01-28 11:03:36,976 - autobackup.utils.logger - INFO - Restoring 1 items from 2026-01-28_11-01-40 to /home/sanjayan/Restore
+2026-01-28 11:03:37,070 - autobackup.utils.logger - INFO - Restore completed: 1 items to /home/sanjayan/Restore
+2026-01-28 11:03:37,070 - autobackup.utils.logger - INFO - Restore completed successfully.
+2026-01-28 11:03:52,029 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 11:03:52,035 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_11-01-40
+2026-01-28 11:04:10,150 - autobackup.utils.logger - INFO - Restoring 1 items from 2026-01-28_11-01-40 to /home/sanjayan/Restore
+2026-01-28 11:04:10,605 - autobackup.utils.logger - ERROR - Failed to decrypt /home/sanjayan/Restore/Anime/24. The Seven Deadly Sins S2 [720p] [Dual].mkv.gpg
+2026-01-28 11:04:10,606 - autobackup.utils.logger - INFO - Restore completed: 1 items to /home/sanjayan/Restore
+2026-01-28 11:04:10,606 - autobackup.utils.logger - INFO - Restore completed successfully.
+2026-01-28 11:05:31,551 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-28 11:14:39,298 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-28 11:15:48,272 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 11:15:48,272 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_11-15-48
+2026-01-28 11:17:59,902 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 11:17:59,903 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_11-15-48
+2026-01-28 11:18:35,996 - autobackup.utils.logger - INFO - Restoring 1 items from 2026-01-28_11-15-48 to /home/sanjayan/Restore
+2026-01-28 11:18:36,085 - autobackup.utils.logger - INFO - Restore completed: 1 items to /home/sanjayan/Restore
+2026-01-28 11:18:36,085 - autobackup.utils.logger - INFO - Restore completed successfully.
+2026-01-28 11:18:55,672 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 11:18:55,673 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_11-15-48
+2026-01-28 11:19:14,012 - autobackup.utils.logger - INFO - Restoring 1 items from 2026-01-28_11-15-48 to /home/sanjayan/Restore
+2026-01-28 11:19:15,385 - autobackup.utils.logger - INFO - Decrypted: /home/sanjayan/Restore/Anime/20. The Seven Deadly Sins S2 [720p] [Dual].mkv.gpg
+2026-01-28 11:19:15,385 - autobackup.utils.logger - INFO - Restore completed: 1 items to /home/sanjayan/Restore
+2026-01-28 11:19:15,385 - autobackup.utils.logger - INFO - Restore completed successfully.
+2026-01-28 11:21:14,460 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-28 11:28:29,938 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-28 11:30:34,297 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-28 11:30:34,298 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 11:30:34,298 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_11-30-34
+2026-01-28 11:30:48,783 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 11:30:48,783 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_11-30-48
+2026-01-28 11:31:51,846 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 11:31:51,847 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_11-31-51
+2026-01-28 11:32:54,350 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 11:32:54,356 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_11-31-51
+2026-01-28 11:33:29,796 - autobackup.utils.logger - INFO - Restoring 1 items from 2026-01-28_11-31-51 to /home/sanjayan/Restore
+2026-01-28 11:33:29,880 - autobackup.utils.logger - INFO - Restore completed: 1 items to /home/sanjayan/Restore
+2026-01-28 11:33:29,881 - autobackup.utils.logger - INFO - Restore completed successfully.
+2026-01-28 11:33:49,628 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 11:33:49,635 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_11-31-51
+2026-01-28 11:34:06,003 - autobackup.utils.logger - INFO - Restoring 1 items from 2026-01-28_11-31-51 to /home/sanjayan/Restore
+2026-01-28 11:34:07,231 - autobackup.utils.logger - INFO - Decrypted: /home/sanjayan/Restore/Anime/21. The Seven Deadly Sins S2 [720p] [Dual].mkv.gpg
+2026-01-28 11:34:07,231 - autobackup.utils.logger - INFO - Restore completed: 1 items to /home/sanjayan/Restore
+2026-01-28 11:34:07,232 - autobackup.utils.logger - INFO - Restore completed successfully.
+2026-01-28 11:43:06,383 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-28 11:55:42,293 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-28 11:56:04,897 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-28 11:56:04,897 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-28_11-56-04
+2026-01-28 11:56:56,690 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 11:56:56,697 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_11-56-04
+2026-01-28 11:58:49,599 - autobackup.utils.logger - INFO - Loading backup versions...
+2026-01-28 11:58:49,606 - autobackup.utils.logger - INFO - Selected backup version: 2026-01-28_11-56-04
+2026-01-28 11:59:16,155 - autobackup.utils.logger - INFO - Restoring 1 items from 2026-01-28_11-56-04 to /home/sanjayan/Restore
+2026-01-28 11:59:17,493 - autobackup.utils.logger - INFO - Decrypted: /home/sanjayan/Restore/Anime/19. The Seven Deadly Sins S2 [720p] [Dual].mkv.gpg
+2026-01-28 11:59:17,493 - autobackup.utils.logger - INFO - Restore completed: 1 items to /home/sanjayan/Restore
+2026-01-28 11:59:17,493 - autobackup.utils.logger - INFO - Restore completed successfully.
+2026-01-28 12:00:22,251 - autobackup.utils.logger - INFO - AutoBackup application closed.
