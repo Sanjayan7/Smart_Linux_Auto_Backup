@@ -9,6 +9,7 @@ import sys
 from autobackup.models.backup_config import BackupConfig
 from autobackup.models.backup_job import BackupJob
 from autobackup.core.rsync_engine import RsyncEngine
+from autobackup.core.metadata_tracker import MetadataTracker
 from autobackup.utils.logger import logger
 
 
@@ -20,6 +21,12 @@ class BackupManager:
         self._current_job: Optional[BackupJob] = None
         self._rsync_engine = RsyncEngine()
         self._backup_thread: Optional[threading.Thread] = None
+        
+        # Initialize metadata tracker for incremental backups
+        metadata_dir = os.path.join(config.destination, ".autobackup_metadata")
+        self._metadata_tracker: Optional[MetadataTracker] = None
+        if config.source:  # Only initialize if source is set
+            self._metadata_tracker = MetadataTracker(metadata_dir, config.source)
 
         self._progress_callback: Optional[Callable[[dict], None]] = None
         self._completion_callback: Optional[Callable[[BackupJob], None]] = None
@@ -65,8 +72,34 @@ class BackupManager:
             backup_dir = self._create_backup_dir(job)
 
             link_dest = None
+            incremental_stats = None
+            
+            # Handle incremental backup with metadata tracking
             if job.config.incremental and not job.config.encryption:
                 link_dest = self._find_last_backup()
+                
+                # Use metadata tracker to detect changed files
+                if self._metadata_tracker:
+                    logger.info("Running incremental backup analysis...")
+                    change_report = self._metadata_tracker.get_changed_files(job.config.exclude_patterns)
+                    
+                    incremental_stats = {
+                        "new_files_count": len(change_report["new_files"]),
+                        "modified_files_count": len(change_report["modified_files"]),
+                        "deleted_files_count": len(change_report["deleted_files"]),
+                        "unchanged_files_count": len(change_report["unchanged_files"]),
+                    }
+                    
+                    # Send incremental analysis to UI
+                    if self._progress_callback:
+                        self._progress_callback({
+                            "type": "incremental_analysis",
+                            **incremental_stats
+                        })
+                    
+                    logger.info(f"Incremental analysis: {incremental_stats['new_files_count']} new, "
+                               f"{incremental_stats['modified_files_count']} modified, "
+                               f"{incremental_stats['unchanged_files_count']} unchanged")
 
             # Capture rsync stats output
             rsync_stats = self._rsync_engine.run_rsync(
@@ -85,11 +118,28 @@ class BackupManager:
                 # In dry-run mode, use rsync's parsed statistics
                 job.files_transferred = rsync_stats.get("number_of_files", 0)
                 job.total_size_bytes = rsync_stats.get("total_file_size", 0)
+                
+                # Extract and format dry run details for UI
+                dry_run_details = rsync_stats.get("dry_run_details", {})
+                if dry_run_details and self._progress_callback:
+                    # Send detailed dry run report to UI
+                    self._progress_callback({
+                        "type": "dry_run_summary",
+                        "new_files": dry_run_details.get("new_files", []),
+                        "updated_files": dry_run_details.get("updated_files", []),
+                        "deleted_files": dry_run_details.get("deleted_files", []),
+                        "total_would_transfer": dry_run_details.get("total_would_transfer", 0),
+                    })
             else:
                 # For real backups, calculate actual size from created files
                 files, size = self._calculate_backup_size(backup_dir)
                 job.files_transferred = files
                 job.total_size_bytes = size
+                
+                # Update metadata tracker after successful backup
+                if job.config.incremental and self._metadata_tracker:
+                    logger.info("Updating incremental backup metadata...")
+                    self._metadata_tracker.update_metadata(exclude_patterns=job.config.exclude_patterns)
 
             if job.config.encryption and not job.config.dry_run:
                 self._encrypt_backup(backup_dir, job.config.password)

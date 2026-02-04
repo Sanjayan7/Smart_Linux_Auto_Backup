@@ -36,7 +36,12 @@ class Settings:
             'schedule': '', # Cron format
             'backup_interval_days': '0', # New: 0 means no daily interval backup
             'backup_name_template': '{timestamp}',
-            'notifications_enabled': 'no' # New default
+            'notifications_enabled': 'no', # New default
+            'cloud_enabled': 'no',
+            'cloud_provider': 's3',
+            'cloud_bucket': '',
+            'cloud_region': 'us-east-1',
+            'cloud_incremental': 'yes',
         }
         with open(CONFIG_FILE, 'w') as configfile:
             self._config.write(configfile)
@@ -58,7 +63,12 @@ class Settings:
             schedule=defaults.get('schedule', ''),
             backup_interval_days=defaults.getint('backup_interval_days', 0),
             backup_name_template=defaults.get('backup_name_template', '{timestamp}'),
-            notifications_enabled=defaults.getboolean('notifications_enabled', False) # Retrieve new field
+            notifications_enabled=defaults.getboolean('notifications_enabled', False),
+            cloud_enabled=defaults.getboolean('cloud_enabled', False),
+            cloud_provider=defaults.get('cloud_provider', 's3'),
+            cloud_bucket=defaults.get('cloud_bucket', ''),
+            cloud_region=defaults.get('cloud_region', 'us-east-1'),
+            cloud_incremental=defaults.getboolean('cloud_incremental', True)
         )
 
     def save_backup_config(self, config: BackupConfig):
@@ -74,7 +84,12 @@ class Settings:
             'schedule': config.schedule or '',
             'backup_interval_days': str(config.backup_interval_days),
             'backup_name_template': config.backup_name_template,
-            'notifications_enabled': 'yes' if config.notifications_enabled else 'no' # Save new field
+            'notifications_enabled': 'yes' if config.notifications_enabled else 'no',
+            'cloud_enabled': 'yes' if config.cloud_enabled else 'no',
+            'cloud_provider': config.cloud_provider,
+            'cloud_bucket': config.cloud_bucket,
+            'cloud_region': config.cloud_region,
+            'cloud_incremental': 'yes' if config.cloud_incremental else 'no'
         }
         with open(CONFIG_FILE, 'w') as configfile:
             self._config.write(configfile)

@@ -296,3 +296,91 @@ AttributeError: 'BackupManager' object has no attribute '_create_backup_dir'
 2026-01-28 11:59:17,493 - autobackup.utils.logger - INFO - Restore completed: 1 items to /home/sanjayan/Restore
 2026-01-28 11:59:17,493 - autobackup.utils.logger - INFO - Restore completed successfully.
 2026-01-28 12:00:22,251 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-28 21:00:26,016 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-28 21:00:29,847 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-28 21:33:14,778 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-28 22:21:27,713 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-29 09:27:04,948 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-29 09:29:44,227 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-29 09:29:44,227 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 09:29:44,227 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_09-29-44/ for incremental backup.
+2026-01-29 09:29:44,227 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress --link-dest=/home/sanjayan/Backup/2026-01-29_09-29-44/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_09-29-44
+2026-01-29 09:31:13,671 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 09:31:13,672 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_09-31-13/ for incremental backup.
+2026-01-29 09:31:13,672 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_09-31-13/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_09-31-13
+2026-01-29 09:33:02,512 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 09:33:02,512 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_09-33-02
+2026-01-29 09:36:00,552 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-29 09:53:47,854 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-29 09:54:28,007 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 09:54:28,007 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_09-54-28/ for incremental backup.
+2026-01-29 09:54:28,007 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_09-54-28/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_09-54-28
+2026-01-29 09:55:13,318 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 09:55:13,319 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_09-55-13/ for incremental backup.
+2026-01-29 09:55:13,319 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_09-55-13/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_09-55-13
+2026-01-29 10:09:42,480 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 10:09:42,480 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_10-09-42/ for incremental backup.
+2026-01-29 10:09:42,480 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_10-09-42/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_10-09-42
+2026-01-29 10:10:11,743 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 10:10:11,743 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_10-10-11/ for incremental backup.
+2026-01-29 10:10:11,743 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_10-10-11/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_10-10-11
+2026-01-29 10:11:36,114 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 10:11:36,115 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_10-11-36/ for incremental backup.
+2026-01-29 10:11:36,115 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_10-11-36/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_10-11-36
+2026-01-29 10:11:56,264 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 10:11:56,264 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_10-11-56/ for incremental backup.
+2026-01-29 10:11:56,264 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_10-11-56/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_10-11-56
+2026-01-29 10:12:52,594 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 10:12:52,594 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_10-12-52
+2026-01-29 11:09:00,135 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 11:09:00,135 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_11-09-00/ for incremental backup.
+2026-01-29 11:09:00,135 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_11-09-00/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_11-09-00
+2026-01-29 11:09:40,846 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 11:09:40,846 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_11-09-40
+2026-01-29 11:13:58,120 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 11:13:58,120 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_11-13-58/ for incremental backup.
+2026-01-29 11:13:58,120 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_11-13-58/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_11-13-58
+2026-01-29 11:29:40,408 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 11:29:40,408 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_11-29-40/ for incremental backup.
+2026-01-29 11:29:40,409 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_11-29-40/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_11-29-40
+2026-01-29 12:33:09,902 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 12:33:09,902 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_12-33-09/ for incremental backup.
+2026-01-29 12:33:09,902 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_12-33-09/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_12-33-09
+2026-01-29 12:41:45,467 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-29 12:41:45,467 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_12-41-45/ for incremental backup.
+2026-01-29 12:41:45,468 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --link-dest=/home/sanjayan/Backup/2026-01-29_12-41-45/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_12-41-45
+2026-01-29 12:42:38,604 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-29 12:42:38,604 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 12:42:38,604 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_12-42-38/ for incremental backup.
+2026-01-29 12:42:38,604 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress --link-dest=/home/sanjayan/Backup/2026-01-29_12-42-38/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_12-42-38
+2026-01-29 12:42:50,894 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 12:42:50,895 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_12-42-50/ for incremental backup.
+2026-01-29 12:42:50,895 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress --link-dest=/home/sanjayan/Backup/2026-01-29_12-42-50/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_12-42-50
+2026-01-29 12:45:56,731 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-29 12:46:03,654 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-29 15:06:59,793 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-29 15:28:31,835 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-29 15:33:02,269 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-29 15:33:06,557 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-29 15:38:15,533 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-29 15:42:54,968 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 15:42:54,969 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_15-42-54
+2026-01-29 15:56:58,164 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 15:56:58,164 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_15-56-58
+2026-01-29 16:15:09,468 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-29 16:15:21,852 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-29 16:17:36,717 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-29 16:19:48,750 - autobackup.utils.logger - INFO - Performing a dry-run backup.
+2026-01-29 16:19:48,750 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 16:19:48,750 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --dry-run --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_16-19-48
+2026-01-29 16:20:19,490 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-29 16:20:55,736 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-29 16:21:29,309 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-01-29 16:21:47,972 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-01-29 16:22:03,270 - autobackup.utils.logger - INFO - Compression enabled for rsync.
+2026-01-29 16:22:03,270 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --compress /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_16-22-03
+2026-01-29 16:25:47,297 - autobackup.utils.logger - INFO - Using --link-dest=/home/sanjayan/Backup/2026-01-29_16-25-47/ for incremental backup.
+2026-01-29 16:25:47,297 - autobackup.utils.logger - INFO - Executing rsync command: rsync -aHv --info=progress2 --stats --delete-excluded --link-dest=/home/sanjayan/Backup/2026-01-29_16-25-47/ /home/sanjayan/Important/ /home/sanjayan/Backup/2026-01-29_16-25-47
+2026-01-29 16:27:00,351 - autobackup.utils.logger - INFO - AutoBackup application closed.
+2026-02-03 21:38:05,779 - autobackup.utils.logger - INFO - AutoBackup application started.
+2026-02-03 21:43:31,019 - autobackup.utils.logger - INFO - AutoBackup application closed.

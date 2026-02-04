@@ -31,7 +31,8 @@ class RsyncEngine:
 
         if dry_run:
             rsync_cmd.append('--dry-run')
-            logger.info("Performing a dry-run backup.")
+            rsync_cmd.append('--itemize-changes')  # Detailed item-by-item changes for dry run
+            logger.info("Performing a dry-run backup with itemize changes.")
 
         if compress: # Add compression flag if enabled
             rsync_cmd.append('--compress')
@@ -99,7 +100,13 @@ class RsyncEngine:
                 logger.error(error_message)
                 raise RuntimeError(error_message)
 
-            return self._parse_rsync_stats(''.join(full_output), (end_time - start_time) if start_time and end_time else 0.0)
+            stats = self._parse_rsync_stats(''.join(full_output), (end_time - start_time) if start_time and end_time else 0.0)
+            
+            # Add dry run details if it was a dry run
+            if dry_run:
+                stats['dry_run_details'] = self._parse_itemize_changes(''.join(full_output))
+            
+            return stats
 
         except FileNotFoundError:
             error_message = "Rsync command not found. Please ensure rsync is installed and in your PATH."
@@ -172,6 +179,75 @@ class RsyncEngine:
 
 
         return summary
+
+    def _parse_itemize_changes(self, output: str) -> Dict[str, List[str]]:
+        """
+        Parse rsync --itemize-changes output to categorize file operations.
+        
+        Itemize format: YXcstpoguax path
+        Y: update type (e.g., '<' = file being transferred, '*' = message, 'c' = local change)
+        X: file type (f=file, d=dir, L=symlink, etc.)
+        c: checksum differs
+        s: size differs
+        t: modification time differs
+        
+        Returns dict with categorized file lists:
+        - new_files: Files that would be created
+        - updated_files: Files that would be updated
+        - unchanged_files: Files that are already in sync
+        - deleted_files: Files that would be deleted
+        """
+        details = {
+            'new_files': [],
+            'updated_files': [],
+            'unchanged_files': [],
+            'deleted_files': [],
+            'total_would_transfer': 0
+        }
+        
+        # Regex to parse itemize output lines
+        # Format: >f+++++++++ some/file/path
+        itemize_pattern = re.compile(r'^([<>c\.\*][fdLDS][c\.][s\.][t\.][p\.][o\.][g\.][u\.][a\.][x\.])\s+(.+)$')
+        
+        for line in output.splitlines():
+            match = itemize_pattern.match(line)
+            if match:
+                flags = match.group(1)
+                filepath = match.group(2)
+                
+                # Parse the first character (update type)
+                update_type = flags[0]
+                file_type = flags[1]
+                
+                # Skip directories in the detailed lists (too verbose)
+                if file_type == 'd':
+                    continue
+                
+                if update_type == '>':
+                    # New file (being sent to destination)
+                    if '+' in flags:
+                        details['new_files'].append(filepath)
+                        details['total_would_transfer'] += 1
+                    else:
+                        # File being updated
+                        details['updated_files'].append(filepath)
+                        details['total_would_transfer'] += 1
+                elif update_type == '<':
+                    # File being received (shouldn't happen in backup mode)
+                    pass
+                elif update_type == '*':
+                    # Deletion or other message
+                    if 'deleting' in line.lower():
+                        details['deleted_files'].append(filepath)
+                elif update_type == '.':
+                    # File is up to date (uncommon in verbose output)
+                    details['unchanged_files'].append(filepath)
+                elif update_type == 'c':
+                    # Local change/checksum
+                    details['updated_files'].append(filepath)
+                    details['total_would_transfer'] += 1
+        
+        return details
 
     def stop_rsync(self):
         if self._process and self._process.poll() is None:

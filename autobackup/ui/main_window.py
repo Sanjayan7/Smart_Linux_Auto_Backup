@@ -270,6 +270,10 @@ class MainWindow(tk.Tk):
                 self._handle_completion(item["job"])
             elif item.get("type") == "error":
                 self._handle_error(item["message"])
+            elif item.get("type") == "dry_run_summary":
+                self._handle_dry_run_summary(item)
+            elif item.get("type") == "incremental_analysis":
+                self._handle_incremental_analysis(item)
             else:
                 self._handle_progress(item)
 
@@ -333,6 +337,68 @@ class MainWindow(tk.Tk):
         messagebox.showerror("Backup Failed", msg)
         self._append_status("❌ ERROR: " + msg + "\n")
         self.progress_label.config(text="❌ Backup failed")
+
+    def _handle_dry_run_summary(self, data: dict):
+        """Display detailed dry run summary with file lists"""
+        new_files = data.get("new_files", [])
+        updated_files = data.get("updated_files", [])
+        deleted_files = data.get("deleted_files", [])
+        total_would_transfer = data.get("total_would_transfer", 0)
+        
+        self._append_status("\n" + "="*50 + "\n")
+        self._append_status("📋 DRY RUN DETAILED REPORT\n")
+        self._append_status("="*50 + "\n\n")
+        
+        # Summary statistics
+        self._append_status(f"📊 Summary:\n")
+        self._append_status(f"   • Total files that would be transferred: {total_would_transfer}\n")
+        self._append_status(f"   • New files: {len(new_files)}\n")
+        self._append_status(f"   • Updated files: {len(updated_files)}\n")
+        self._append_status(f"   • Deleted files: {len(deleted_files)}\n\n")
+        
+        # Show new files (limit to first 20)
+        if new_files:
+            self._append_status(f"✨ NEW FILES ({len(new_files)}):\n")
+            for i, f in enumerate(new_files[:20], 1):
+                self._append_status(f"   {i}. {f}\n")
+            if len(new_files) > 20:
+                self._append_status(f"   ... and {len(new_files) - 20} more\n")
+            self._append_status("\n")
+        
+        # Show updated files (limit to first 20)
+        if updated_files:
+            self._append_status(f"🔄 UPDATED FILES ({len(updated_files)}):\n")
+            for i, f in enumerate(updated_files[:20], 1):
+                self._append_status(f"   {i}. {f}\n")
+            if len(updated_files) > 20:
+                self._append_status(f"   ... and {len(updated_files) - 20} more\n")
+            self._append_status("\n")
+        
+        # Show deleted files (limit to first 20)
+        if deleted_files:
+            self._append_status(f"🗑️  DELETED FILES ({len(deleted_files)}):\n")
+            for i, f in enumerate(deleted_files[:20], 1):
+                self._append_status(f"   {i}. {f}\n")
+            if len(deleted_files) > 20:
+                self._append_status(f"   ... and {len(deleted_files) - 20} more\n")
+            self._append_status("\n")
+        
+        if not new_files and not updated_files and not deleted_files:
+            self._append_status("✓ No changes detected - backup is already up to date!\n\n")
+
+    def _handle_incremental_analysis(self, data: dict):
+        """Display incremental backup analysis statistics"""
+        new_count = data.get("new_files_count", 0)
+        modified_count = data.get("modified_files_count", 0)
+        deleted_count = data.get("deleted_files_count", 0)
+        unchanged_count = data.get("unchanged_files_count", 0)
+        
+        self._append_status("\n📊 INCREMENTAL BACKUP ANALYSIS\n")
+        self._append_status(f"   ✨ New files: {new_count}\n")
+        self._append_status(f"   🔄 Modified files: {modified_count}\n")
+        self._append_status(f"   🗑️  Deleted files: {deleted_count}\n")
+        self._append_status(f"   ✓ Unchanged files: {unchanged_count}\n")
+        self._append_status(f"   💾 Efficiency: Only backing up {new_count + modified_count} changed files\n\n")
 
     # ------------------------------------------------------------------
 
