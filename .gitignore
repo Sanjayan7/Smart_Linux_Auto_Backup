@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.log
+backup.conf
+venv/
+.venv/
+autobackup/config/backup.conf

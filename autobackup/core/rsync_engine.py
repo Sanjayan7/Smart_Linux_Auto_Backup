@@ -1,6 +1,7 @@
 import subprocess
 import re
 import os
+import tempfile
 from typing import List, Callable, Optional, Dict, Any
 from autobackup.utils.logger import logger
 
@@ -16,10 +17,14 @@ class RsyncEngine:
                       dry_run: bool = False,
                       progress_callback: Optional[Callable[[dict], None]] = None,
                       link_dest: Optional[str] = None,
-                      compress: bool = False) -> Dict[str, Any]: # New parameter for compression
+                      compress: bool = False,
+                      files_from_list: Optional[List[str]] = None) -> Dict[str, Any]:
         """
         Executes rsync command and provides real-time progress.
         Returns a dictionary with backup summary statistics.
+        
+        Args:
+            files_from_list: If provided, only backup these files (for incremental)
         """
         rsync_cmd = [
             'rsync',
@@ -45,6 +50,17 @@ class RsyncEngine:
             else:
                 logger.warning(f"Skipping --link-dest because path is not absolute: {link_dest}")
 
+        # Handle incremental: only backup specified files
+        temp_files_file = None
+        if files_from_list:
+            logger.info(f"Incremental mode: backing up {len(files_from_list)} changed files")
+            # Create temporary file with list of files to backup
+            temp_files_file = tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.txt')
+            for filepath in files_from_list:
+                temp_files_file.write(filepath + '\n')
+            temp_files_file.close()
+            # Tell rsync to only transfer files in this list
+            rsync_cmd.extend(['--files-from', temp_files_file.name])
 
         for pattern in exclude_patterns:
             if pattern:
@@ -104,7 +120,16 @@ class RsyncEngine:
             
             # Add dry run details if it was a dry run
             if dry_run:
-                stats['dry_run_details'] = self._parse_itemize_changes(''.join(full_output))
+                stats['dry_run_details'] = self._parse_itemize_changes(''.join(full_output), source)
+                # CRITICAL FIX: Ensure consistency between detailed list and summary count.
+                # rsync's raw 'number_of_files' often includes directories and the root folder.
+                # We overwrite it with the precise count of actual files from itemize_changes
+                # to guarantee the popup summary matches the detailed list exactly. (Rule 3)
+                accurate_count = stats['dry_run_details']['total_would_transfer']
+                stats['number_of_files'] = accurate_count
+                stats['files_transferred'] = accurate_count
+                
+                logger.info(f"Dry-run accurate file count: {accurate_count} (directories excluded)")
             
             return stats
 
@@ -115,6 +140,14 @@ class RsyncEngine:
         except Exception as e:
             logger.error(f"An unexpected error occurred during rsync: {e}")
             raise
+        finally:
+            # Clean up temporary files from list created for incremental backup
+            if temp_files_file:
+                try:
+                    os.unlink(temp_files_file.name)
+                    logger.debug(f"Cleaned up temporary files list: {temp_files_file.name}")
+                except Exception as e:
+                    logger.warning(f"Failed to clean up temporary files list: {e}")
 
     def _parse_rsync_stats(self, output: str, duration: float) -> Dict[str, Any]:
         """Parses the rsync --stats output for summary information."""
@@ -180,7 +213,7 @@ class RsyncEngine:
 
         return summary
 
-    def _parse_itemize_changes(self, output: str) -> Dict[str, List[str]]:
+    def _parse_itemize_changes(self, output: str, source: str = None) -> Dict[str, List[Any]]:
         """
         Parse rsync --itemize-changes output to categorize file operations.
         
@@ -191,9 +224,13 @@ class RsyncEngine:
         s: size differs
         t: modification time differs
         
+        Args:
+            output: The rsync command output
+            source: The source directory path (to retrieve file sizes)
+        
         Returns dict with categorized file lists:
-        - new_files: Files that would be created
-        - updated_files: Files that would be updated
+        - new_files: Files that would be created (with size info)
+        - updated_files: Files that would be updated (with size info)
         - unchanged_files: Files that are already in sync
         - deleted_files: Files that would be deleted
         """
@@ -206,8 +243,11 @@ class RsyncEngine:
         }
         
         # Regex to parse itemize output lines
-        # Format: >f+++++++++ some/file/path
-        itemize_pattern = re.compile(r'^([<>c\.\*][fdLDS][c\.][s\.][t\.][p\.][o\.][g\.][u\.][a\.][x\.])\s+(.+)$')
+        # Format: >f+++++++++ some/file/path or <f.st...... some/file/path
+        # First char: update type (< > c . *)
+        # Second char: file type (f d L D S)
+        # Rest: flags (can vary in length)
+        itemize_pattern = re.compile(r'^([<>c\.\*][fdLDS]\S+)\s+(.+)$')
         
         for line in output.splitlines():
             match = itemize_pattern.match(line)
@@ -223,14 +263,17 @@ class RsyncEngine:
                 if file_type == 'd':
                     continue
                 
+                # Get file info (with size if source is provided)
+                file_info = self._get_file_info_from_path(filepath, source) if source else {'path': filepath, 'size_human': 'N/A', 'size_bytes': 0}
+                
                 if update_type == '>':
                     # New file (being sent to destination)
                     if '+' in flags:
-                        details['new_files'].append(filepath)
+                        details['new_files'].append(file_info)
                         details['total_would_transfer'] += 1
                     else:
                         # File being updated
-                        details['updated_files'].append(filepath)
+                        details['updated_files'].append(file_info)
                         details['total_would_transfer'] += 1
                 elif update_type == '<':
                     # File being received (shouldn't happen in backup mode)
@@ -244,10 +287,44 @@ class RsyncEngine:
                     details['unchanged_files'].append(filepath)
                 elif update_type == 'c':
                     # Local change/checksum
-                    details['updated_files'].append(filepath)
+                    details['updated_files'].append(file_info)
                     details['total_would_transfer'] += 1
         
         return details
+
+    def _get_file_info_from_path(self, filepath: str, source: str) -> Dict[str, Any]:
+        """Get file size information from the source directory"""
+        # Ensure source ends with separator for proper path joining
+        if not source.endswith(os.sep):
+            source += os.sep
+        
+        full_path = source + filepath
+        
+        info = {
+            'path': filepath,
+            'size_bytes': 0,
+            'size_human': '0 B'
+        }
+        
+        # Get file size if it exists
+        try:
+            if os.path.exists(full_path) and os.path.isfile(full_path):
+                size_bytes = os.path.getsize(full_path)
+                info['size_bytes'] = size_bytes
+                info['size_human'] = self._format_size(size_bytes)
+        except (OSError, IOError):
+            # If we can't get the size, just keep defaults
+            pass
+        
+        return info
+    
+    def _format_size(self, bytes_size: int) -> str:
+        """Convert bytes to human-readable format"""
+        for unit in ['B', 'KB', 'MB', 'GB', 'TB']:
+            if bytes_size < 1024.0:
+                return f"{bytes_size:.1f} {unit}"
+            bytes_size /= 1024.0
+        return f"{bytes_size:.1f} PB"
 
     def stop_rsync(self):
         if self._process and self._process.poll() is None:

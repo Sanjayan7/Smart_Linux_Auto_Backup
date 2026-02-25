@@ -5,7 +5,7 @@ This module defines the interface that all cloud providers must implement.
 """
 
 from abc import ABC, abstractmethod
-from typing import Dict, Optional, Callable
+from typing import Dict, Optional, Callable, List
 
 
 class CloudProvider(ABC):
@@ -88,6 +88,35 @@ class CloudProvider(ABC):
         
         Returns:
             ETag string or None if file doesn't exist
+        """
+        pass
+    
+    @abstractmethod
+    def list_objects(self, prefix: str = "") -> List[Dict]:
+        """
+        List objects in cloud storage.
+        
+        Args:
+            prefix: Filter objects starting with this prefix
+            
+        Returns:
+            List of dicts with keys: key, size, last_modified
+        """
+        pass
+
+    @abstractmethod
+    def download_file(self, remote_path: str, local_path: str,
+                     progress_callback: Optional[Callable[[int, int], None]] = None) -> bool:
+        """
+        Download a file from cloud storage.
+        
+        Args:
+            remote_path: Path in cloud storage
+            local_path: Destination local path
+            progress_callback: Optional callback(bytes_downloaded, total_bytes)
+            
+        Returns:
+            True if successful, False otherwise
         """
         pass
     
