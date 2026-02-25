@@ -93,7 +93,11 @@ class DryRunDemo:
         }
         
         # Parse itemize-changes lines
-        itemize_pattern = re.compile(r'^([<>c\.*][fdLDS][c\.][s\.][t\.][p\.][o\.][g\.][u\.][a\.][x\.])\s+(.+)$')
+        # Format: >f+++++++++ file.txt or <f.st...... file.txt
+        # First char: update type (< > c . *)
+        # Second char: file type (f d L D S)
+        # Rest: flags (can vary in length)
+        itemize_pattern = re.compile(r'^([<>c\.\*][fdLDS]\S+)\s+(.+)$')
         
         for line in output.splitlines():
             # Parse itemized changes

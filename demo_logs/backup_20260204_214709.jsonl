@@ -1,0 +1,18 @@
+{"timestamp": "2026-02-04T21:47:09.010741", "level": "INFO", "category": "system", "message": "Status changed: idle \u2192 running", "context": {}}
+{"timestamp": "2026-02-04T21:47:09.011144", "level": "INFO", "category": "system", "message": "Starting incremental backup process", "context": {}}
+{"timestamp": "2026-02-04T21:47:09.011267", "level": "INFO", "category": "backup", "message": "Scanning source directory: /home/user/docs", "context": {}}
+{"timestamp": "2026-02-04T21:47:10.611987", "level": "SUCCESS", "category": "backup", "message": "Scan complete. Found 150 files.", "context": {}}
+{"timestamp": "2026-02-04T21:47:10.612424", "level": "INFO", "category": "metadata", "message": "Detecting file changes...", "context": {}}
+{"timestamp": "2026-02-04T21:47:11.616381", "level": "INFO", "category": "backup", "message": "Change detection results: 5 new, 2 modified", "context": {}}
+{"timestamp": "2026-02-04T21:47:11.616715", "level": "INFO", "category": "rsync", "message": "Starting file transfer...", "context": {}}
+{"timestamp": "2026-02-04T21:47:11.616927", "level": "INFO", "category": "rsync", "message": "Transferring report.pdf...", "context": {"size_bytes": 2500000}}
+{"timestamp": "2026-02-04T21:47:12.117263", "level": "INFO", "category": "rsync", "message": "Transferring image.png...", "context": {"size_bytes": 5000000}}
+{"timestamp": "2026-02-04T21:47:12.618175", "level": "INFO", "category": "rsync", "message": "Transferring notes.txt...", "context": {"size_bytes": 1024}}
+{"timestamp": "2026-02-04T21:47:13.118971", "level": "INFO", "category": "rsync", "message": "Transferring data.csv...", "context": {"size_bytes": 1500000}}
+{"timestamp": "2026-02-04T21:47:13.619524", "level": "INFO", "category": "rsync", "message": "Transferring video_intro.mp4...", "context": {"size_bytes": 55000000}}
+{"timestamp": "2026-02-04T21:47:14.120301", "level": "WARNING", "category": "backup", "message": "Large file detected: video_intro.mp4", "context": {"size_mb": 52.45208740234375}}
+{"timestamp": "2026-02-04T21:47:14.120724", "level": "SUCCESS", "category": "rsync", "message": "All files transferred successfully.", "context": {}}
+{"timestamp": "2026-02-04T21:47:14.120967", "level": "INFO", "category": "metadata", "message": "Updating internal metadata registry...", "context": {}}
+{"timestamp": "2026-02-04T21:47:14.621341", "level": "SUCCESS", "category": "metadata", "message": "Metadata saved.", "context": {}}
+{"timestamp": "2026-02-04T21:47:14.621875", "level": "INFO", "category": "system", "message": "Status changed: running \u2192 completed", "context": {}}
+{"timestamp": "2026-02-04T21:47:14.622150", "level": "SUCCESS", "category": "system", "message": "Backup Job Completed Successfully", "context": {"job_id": "backup_20260204_214709", "status": "completed", "duration_seconds": 5.61, "files_transferred": 5, "bytes_transferred": 64001024, "errors": 0, "warnings": 1}}
