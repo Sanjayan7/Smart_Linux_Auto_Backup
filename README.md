@@ -37,8 +37,6 @@ This project focuses on reliability, data integrity, and ease of use.
 - ms-python.vscode-python-envs
 - github.copilot-chat
 
-(Java extensions were installed in the editor but not used in this project.)
-
 ---
 
 ## 📦 Installation
